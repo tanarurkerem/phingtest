@@ -2,13 +2,18 @@
 <project name="Phing teszt" default="hello">
   
   <available file="drupal-7.36" property="drupal_exists" value="Yes"/>
-  <target name="hello" depends="composer" unless="drupal_exists">
+  <target name="hello" depends="drush" unless="drupal_exists">
     <echo msg="Hello Vilag" />
-    <exec command="drush dl drupal" passthru="true" />
+    <exec command="vendor/bin/drush dl drupal" passthru="true" />
   </target>
   
   <available file="composer.phar" property="composer_phar_exists" value="Yes"/>
   <target name="composer" unless="composer_phar_exists">
     <exec command="curl -sS https://getcomposer.org/installer | php" passthru="true" />
+  </target>
+  
+  <available file="vendor/bin/drush" property="drush_exists" value="Yes"/>
+  <target name="drush" depends="composer" unless="drush_exists">
+    <exec command="composer require drush/drush:6.1.0" />
   </target>
 </project>

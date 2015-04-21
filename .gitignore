@@ -1,2 +1,6 @@
 phing
 composer.phar
+composer.json
+composer.lock
+drupal-7.36/
+vendor/
