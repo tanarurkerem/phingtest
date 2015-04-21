@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Phing teszt" default="hello">
-  <target name="hello">
+  
+  <available file="drupal-7.36" property="drupal_exists" value="Yes"/>
+  <target name="hello" depends="composer" unless="drupal_exists">
     <echo msg="Hello Vilag" />
+    <exec command="drush dl drupal" passthru="true" />
+  </target>
+  
+  <available file="composer.phar" property="composer_phar_exists" value="Yes"/>
+  <target name="composer" unless="composer_phar_exists">
+    <exec command="curl -sS https://getcomposer.org/installer | php" passthru="true" />
   </target>
 </project>
