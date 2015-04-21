@@ -2,5 +2,5 @@ Install
 =======
 
   ```
-  $ ./init-phing.sh
+  $ bash ./init-phing.sh
   ```
