@@ -4,7 +4,7 @@
   <available file="drupal-7.36" property="drupal_exists" value="Yes"/>
   <target name="hello" depends="drush" unless="drupal_exists">
     <echo msg="Hello Vilag" />
-    <exec command="vendor/bin/drush dl drupal" passthru="true" />
+    <exec command="vendor/bin/drush make build.make www" passthru="true" />
   </target>
   
   <available file="composer.phar" property="composer_phar_exists" value="Yes"/>
