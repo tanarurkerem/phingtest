@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Phing teszt" default="hello">
+  <target name="hello">
+    <echo msg="Hello Vilag" />
+  </target>
+</project>
