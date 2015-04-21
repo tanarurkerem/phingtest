@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Phing teszt" default="hello">
   
-  <available file="drupal-7.36" property="drupal_exists" value="Yes"/>
-  <target name="hello" depends="drush" unless="drupal_exists">
+  <property name="drush" value="vendor/bin/drush" />
+  <property name="docroot" value="www" />
+  
+  <available file="${docroot}" property="drupal_exists" value="Yes"/>
+  <target name="hello" depends="drush, drush_version" unless="drupal_exists">
     <echo msg="Hello Vilag" />
-    <exec command="vendor/bin/drush make build.make www" passthru="true" />
+    <exec command="${drush} make build.make ${docroot}" passthru="true" />
   </target>
   
   <available file="composer.phar" property="composer_phar_exists" value="Yes"/>
@@ -14,6 +17,11 @@
   
   <available file="vendor/bin/drush" property="drush_exists" value="Yes"/>
   <target name="drush" depends="composer" unless="drush_exists">
-    <exec command="composer require drush/drush:6.1.0" />
+    <exec command="composer require drush/drush:6.1.0" passthru="true" />
+  </target>
+  
+  <target name="drush_version" depends="drush">
+    <exec command="${drush} --version" passthru="true" />
+    <exec command="${drush} status" passthru="true" />
   </target>
 </project>
