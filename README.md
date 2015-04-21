@@ -1,0 +1,6 @@
+Install
+=======
+
+  ```
+  $ ./init-phing.sh
+  ```
